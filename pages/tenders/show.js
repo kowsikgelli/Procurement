@@ -76,6 +76,7 @@ class tendershow extends React.Component{
 		//console.log(this.props.query.id)
 		return(
 				<Layout>
+					
 					<h3>Tender Details</h3>
 					{this.renderCards()}
 					<br />

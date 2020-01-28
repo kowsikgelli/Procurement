@@ -5,7 +5,7 @@ contract Procurement{
         owner=msg.sender;
     }
     modifier onlyAdmin(){
-        require(msg.sender==owner);
+        require(msg.sender==owner,"only Admin has access");
         _;
     }
     struct Tender{
@@ -29,15 +29,16 @@ contract Procurement{
     
     //mapping(address=>mapping(uint=>bool))public bidded;
     function createTender(string memory _tenderType,string memory _tenderSubject,string memory _tenderReceivingLocation,uint _endDate,uint _maxBidValue)public onlyAdmin{
+        require(_endDate>now,"enter correct closing date");
         tenderCount++;
         Tenders[tenderCount]=Tender(tenderCount,_tenderType,now,_endDate,_tenderSubject,_tenderReceivingLocation,_maxBidValue);
         
     }
     function submitBid(uint _tenderId,uint _bidValue)public{
-        require(now<Tenders[_tenderId].endDate);
-        require(_bidValue<=Tenders[_tenderId].maxBidValue);
+        require(now<Tenders[_tenderId].endDate,"bid is closed");
+        require(_bidValue<=Tenders[_tenderId].maxBidValue,"max bidding value exceeded");
        // require(!bidded[msg.sender][_tenderId]);
-        require(msg.sender!=owner);
+        require(msg.sender!=owner,"owner cant submit Bid");
         bidCount++;
         Bids[bidCount]=Bid(msg.sender,_tenderId,_bidValue);
         //bidded[msg.sender][_tenderId]=true;

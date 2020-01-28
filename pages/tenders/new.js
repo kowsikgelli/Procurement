@@ -18,17 +18,19 @@ class newTender extends React.Component{
     	this.setState({
       	startDate: date.target.value
     	});
-    	console.log(typeof(this.state.startDate))
+    	console.log("selected date"+this.state.startDate+" "+date.target.value)
 	};
 	onSubmit=async(event)=>{
 		event.preventDefault();
 		this.setState({loading:true,errorMessage:''});
 		try{
+      console.log(this.state.startDate)
 			const accounts=await web3.eth.getAccounts();
 			console.log(accounts)
 			const d = new Date(this.state.startDate);
-
-			await instance.methods.createTender(this.state.tenderType,this.state.tenderSubject,this.state.tenderRecevingLocation,d.getTime(),this.state.maxBidValue)
+      let closingDate=d.getTime()*0.001;
+      console.log(d.getTime()*0.001)
+			await instance.methods.createTender(this.state.tenderType,this.state.tenderSubject,this.state.tenderRecevingLocation,closingDate,this.state.maxBidValue)
 			.send({
 				from:accounts[0]
 			});

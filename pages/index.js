@@ -8,10 +8,15 @@ class Procurement extends React.Component{
 	static async getInitialProps(){
 		const tenderCount=await instance.methods.tenderCount().call();
 		let tenders=[];
+		const d=new Date();
+		const exitDate=~~(d.getTime()*0.001);
 		for(let i=1;i<=tenderCount;i++){
 			const singletender=await instance.methods.Tenders(i).call();
 			tenders.push(singletender);
-
+			let index=tenders.indexOf(singletender)
+			if(exitDate>singletender.endDate){
+				tenders.splice(index,1);
+			}
 		}
 		return {tenders}
 	}
