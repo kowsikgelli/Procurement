@@ -43,6 +43,11 @@ class newTender extends React.Component{
 	render(){
 		return(
 			<Layout>
+      <Message error
+            header='Sorry :( This Page can be accessed by admin only'
+            content='Even if you try to create Tender you will get error'
+            
+          />
 				<Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
     				<Form.Field>
       					<label>Tender Subject</label>

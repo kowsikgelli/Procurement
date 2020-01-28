@@ -25,7 +25,19 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/tenders/Admin/adminDetails": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/tenders/new": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/tenders/show": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/tenders/submitbid/newbid": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

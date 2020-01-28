@@ -22,6 +22,7 @@ class showBids extends React.Component{
 			return{
 				header:bidobject.bidder,
 				description:bidobject.bidValue,
+				meta:" Bid Hash:"+bidobject.fileHash,
 				fluid:true
 			}
 		})

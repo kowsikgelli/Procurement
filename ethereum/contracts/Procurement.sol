@@ -23,6 +23,7 @@ contract Procurement{
         address bidder;
         uint tenderId;
         uint bidValue;
+        string fileHash;
     }
     mapping(uint=>Bid)public Bids;
     uint public bidCount;
@@ -34,13 +35,13 @@ contract Procurement{
         Tenders[tenderCount]=Tender(tenderCount,_tenderType,now,_endDate,_tenderSubject,_tenderReceivingLocation,_maxBidValue);
         
     }
-    function submitBid(uint _tenderId,uint _bidValue)public{
+    function submitBid(uint _tenderId,uint _bidValue,string memory _fileHash)public{
         require(now<Tenders[_tenderId].endDate,"bid is closed");
         require(_bidValue<=Tenders[_tenderId].maxBidValue,"max bidding value exceeded");
        // require(!bidded[msg.sender][_tenderId]);
         require(msg.sender!=owner,"owner cant submit Bid");
         bidCount++;
-        Bids[bidCount]=Bid(msg.sender,_tenderId,_bidValue);
+        Bids[bidCount]=Bid(msg.sender,_tenderId,_bidValue,_fileHash);
         //bidded[msg.sender][_tenderId]=true;
     }
     function winner(uint _tenderId)public onlyAdmin view returns(address){
