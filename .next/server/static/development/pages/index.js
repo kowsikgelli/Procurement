@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -121,9 +121,13 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
     route: "/"
   }, __jsx("a", {
     className: "item"
-  }, "Home")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Menu, {
+  }, "Home")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, null, "Public Procurement Portal"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Menu, {
     position: "right"
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, null, "Public Procurement Portal"))));
+  }, __jsx(_routes__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    route: "/tenders/closed/closedTenders"
+  }, __jsx("a", {
+    className: "item"
+  }, "Closed Tenders")))));
 });
 
 /***/ }),
@@ -403,7 +407,8 @@ class Procurement extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component
         description: __jsx(_routes__WEBPACK_IMPORTED_MODULE_5__["Link"], {
           route: `/tenders/${tenderobject.id}`
         }, __jsx("a", null, "view tender")),
-        fluid: true
+        fluid: true,
+        color: 'green'
       };
     });
     return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Card"].Group, {
@@ -412,15 +417,7 @@ class Procurement extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component
   }
 
   render() {
-    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_4__["default"], null, __jsx("div", null, __jsx(_routes__WEBPACK_IMPORTED_MODULE_5__["Link"], {
-      route: "/tenders/new"
-    }, __jsx("a", null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-      floated: "right",
-      content: "create tender",
-      icon: "add",
-      labelposition: "left",
-      primary: true
-    }))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"], {
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_4__["default"], null, __jsx("div", null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"], {
       onSubmit: this.register,
       error: !!this.state.errorMessage,
       success: !!this.state.successMessage
@@ -435,7 +432,15 @@ class Procurement extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component
     }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Message"], {
       success: true,
       header: this.state.successMessage
-    })), __jsx("h3", null, "Open Tenders"), this.renderTenders()));
+    })), __jsx(_routes__WEBPACK_IMPORTED_MODULE_5__["Link"], {
+      route: "/tenders/new"
+    }, __jsx("a", null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      floated: "right",
+      content: "create tender",
+      icon: "add",
+      labelposition: "left",
+      primary: true
+    }))), __jsx("h3", null, "Open Tenders"), this.renderTenders()));
   }
 
 }
@@ -458,7 +463,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

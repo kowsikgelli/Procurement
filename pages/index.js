@@ -52,7 +52,8 @@ class Procurement extends React.Component{
 						<a>view tender</a>
 					</Link>
 					),
-				fluid:true
+				fluid:true,
+				color:'green'
 			}
 		})
 		return <Card.Group items={items} />
@@ -62,20 +63,21 @@ class Procurement extends React.Component{
 		return(
 			<Layout>
 			<div>
-				<Link route="/tenders/new">
-					<a>
-						<Button floated="right" content="create tender" icon="add" labelposition="left" primary={true}/>
-						
-					</a>
-				</Link>
+				
 
 				<Form onSubmit={this.register} error={!!this.state.errorMessage} success={!!this.state.successMessage}>
 					<Button loading={this.state.loading} type="submit" content="Register"  primary={true}/>
 					<Message error header={this.state.errorMessage}/>
 					<Message success header={this.state.successMessage}/>
 				</Form>
-				
+				<Link route="/tenders/new">
+					<a>
+						<Button floated="right" content="create tender" icon="add" labelposition="left" primary={true}/>
+						
+					</a>
+				</Link>
 				<h3>Open Tenders</h3>
+				
 				{this.renderTenders()}
 			</div>
 			</Layout>

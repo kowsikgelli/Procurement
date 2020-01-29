@@ -10,10 +10,15 @@ export default ()=>{
 				Home
 			</a>
 		</Link>
-		<Menu.Menu position="right">
-			<Menu.Item>
+		<Menu.Item>
 			Public Procurement Portal
-			</Menu.Item>
+		</Menu.Item>
+		<Menu.Menu position="right">
+			<Link route='/tenders/closed/closedTenders'>
+				<a className="item">
+					Closed Tenders
+				</a>
+			</Link>
 		</Menu.Menu>
 	</Menu>
 	</div>
