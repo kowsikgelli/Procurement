@@ -1,10 +1,15 @@
 import React from 'react'
 import instance from '../ethereum/tender'
-import {Card,Button} from 'semantic-ui-react';
+import {Card,Button,Loader,Message,Form} from 'semantic-ui-react';
 import Layout from '../components/Layout'
 import {Link} from '../routes'
 class Procurement extends React.Component{
-	//state={owner:""}
+	state={
+		errorMessage:'',
+		loading:false,
+		account:'',
+		successMessage:''
+	}
 	static async getInitialProps(){
 		const tenderCount=await instance.methods.tenderCount().call();
 		let tenders=[];
@@ -20,6 +25,24 @@ class Procurement extends React.Component{
 		}
 		return {tenders}
 	}
+	register=async (event)=>{
+		this.setState({loading:true,errorMessage:''});
+		try{
+			const accounts=await web3.eth.getAccounts();
+			console.log(accounts)
+			this.setState({account:accounts[0]})
+			console.log(this.state.account)
+			await instance.methods.Register(this.state.account)
+			.send({
+				from:accounts[0]
+			});
+			this.setState({successMessage:"successfully Registered"})
+		}catch(err){
+			this.setState({errorMessage:err.message});
+			console.log(err.message)
+		}
+		this.setState({loading:false})
+	}
 	renderTenders(){
 		const items=this.props.tenders.map(tenderobject=>{
 			return{
@@ -34,11 +57,7 @@ class Procurement extends React.Component{
 		})
 		return <Card.Group items={items} />
 	}
-	// async componentDidMount(){
-	// 	const owner=await instance.methods.owner().call();
-	// 	console.log(owner)
-	// 	this.setState({owner})
-	// }
+	
 	render(){
 		return(
 			<Layout>
@@ -49,6 +68,13 @@ class Procurement extends React.Component{
 						
 					</a>
 				</Link>
+
+				<Form onSubmit={this.register} error={!!this.state.errorMessage} success={!!this.state.successMessage}>
+					<Button loading={this.state.loading} type="submit" content="Register"  primary={true}/>
+					<Message error header={this.state.errorMessage}/>
+					<Message success header={this.state.successMessage}/>
+				</Form>
+				
 				<h3>Open Tenders</h3>
 				{this.renderTenders()}
 			</div>

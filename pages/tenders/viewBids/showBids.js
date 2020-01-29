@@ -9,9 +9,12 @@ class showBids extends React.Component{
 		let bids=[]
 		for(let i=1;i<=bidCount;i++){
 			const bid=await instance.methods.Bids(i).call();
-			const bidTenderId=bid.tenderId;
-			if(bidTenderId==props.query.id){
-				const singleBid=await instance.methods.Bids(i).call();
+			let singleTenderId=bid.tenderId;
+			
+			if(singleTenderId==props.query.id){
+				
+			let singleBid=await instance.methods.Bids(props.query.id).call();
+			
 				bids.push(singleBid);
 			}
 		}

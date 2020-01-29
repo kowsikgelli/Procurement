@@ -27,7 +27,15 @@ contract Procurement{
     }
     mapping(uint=>Bid)public Bids;
     uint public bidCount;
-    
+    struct BidRegister{
+        address bidder;
+        bool registered;
+    }
+    mapping(address=>BidRegister)public BidRegisters;
+    function Register(address _bidder)public{
+        require(BidRegisters[_bidder].registered==false);
+        BidRegisters[_bidder]=BidRegister(_bidder,true);
+    }
     //mapping(address=>mapping(uint=>bool))public bidded;
     function createTender(string memory _tenderType,string memory _tenderSubject,string memory _tenderReceivingLocation,uint _endDate,uint _maxBidValue)public onlyAdmin{
         require(_endDate>now,"enter correct closing date");
@@ -36,6 +44,7 @@ contract Procurement{
         
     }
     function submitBid(uint _tenderId,uint _bidValue,string memory _fileHash)public{
+        require(BidRegisters[msg.sender].registered==true);
         require(now<Tenders[_tenderId].endDate,"bid is closed");
         require(_bidValue<=Tenders[_tenderId].maxBidValue,"max bidding value exceeded");
        // require(!bidded[msg.sender][_tenderId]);
@@ -44,6 +53,7 @@ contract Procurement{
         Bids[bidCount]=Bid(msg.sender,_tenderId,_bidValue,_fileHash);
         //bidded[msg.sender][_tenderId]=true;
     }
+    
     function winner(uint _tenderId)public onlyAdmin view returns(address){
         require(now>Tenders[_tenderId].endDate);
         uint min=Tenders[_tenderId].maxBidValue;
