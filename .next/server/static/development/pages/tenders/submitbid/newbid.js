@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -349,22 +349,39 @@ class newBid extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       bidValue: '',
       errorMessage: '',
       loading: false,
-      fileHash: ''
+      fileHash: '',
+      isButtonDisabled: false,
+      exactTwoFiles: false
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "combinehash", event => {
       event.preventDefault();
-      this.setState({
-        fileHash: Object(js_sha256__WEBPACK_IMPORTED_MODULE_7__["sha256"])(this.state.fileHash)
-      });
+
+      if (!!this.state.fileHash) {
+        this.setState({
+          fileHash: Object(js_sha256__WEBPACK_IMPORTED_MODULE_7__["sha256"])(this.state.fileHash),
+          isButtonDisabled: true
+        });
+      }
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "uploadFile", event => {
-      console.log(event.target.files.length);
+      try {
+        console.log(event.target.files.length);
 
-      for (let i = 0; i < event.target.files.length; i++) {
-        console.log("hi");
-        this.generateHash(event.target.files[i]);
+        if (event.target.files.length == 2) {
+          for (let i = 0; i < event.target.files.length; i++) {
+            console.log("hi");
+            this.generateHash(event.target.files[i]);
+          }
+        } else {
+          throw "select exact two files";
+        }
+      } catch (err) {
+        this.setState({
+          errorMessage: err
+        });
+        console.log(err);
       } // console.log(event.target.files[0])
 
     });
@@ -432,7 +449,8 @@ class newBid extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       onChange: this.uploadFile
     })), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
       size: "small",
-      onClick: this.combinehash
+      onClick: this.combinehash,
+      disabled: this.state.isButtonDisabled
     }, "Generate Hash"), __jsx("br", null), __jsx("br", null), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"].Field, null, __jsx("label", null, "Documents Hash (sha256)"), __jsx("input", {
       type: "text",
       value: this.state.fileHash
@@ -472,7 +490,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 7:
+/***/ 6:
 /*!*************************************************!*\
   !*** multi ./pages/tenders/submitbid/newbid.js ***!
   \*************************************************/

@@ -10,7 +10,9 @@ class newBid extends React.Component{
 		bidValue:'',
 		errorMessage:'',
 		loading:false,
-		fileHash:''
+		fileHash:'',
+		isButtonDisabled:false,
+		exactTwoFiles:false
 	}
 	static async getInitialProps(props){
 		return{
@@ -31,15 +33,29 @@ class newBid extends React.Component{
 	}
 	combinehash=(event)=>{
 		event.preventDefault();
-		this.setState({fileHash:sha256(this.state.fileHash)})
+		if(!!this.state.fileHash){
+			this.setState({fileHash:sha256(this.state.fileHash),isButtonDisabled:true})
+		}
+		
+
 	}
 	uploadFile=(event)=>{
-
-		console.log(event.target.files.length)
-		for(let i=0;i<event.target.files.length;i++){
-			console.log("hi")
-			this.generateHash(event.target.files[i]);
+		try{
+			console.log(event.target.files.length)
+			if(event.target.files.length==2){
+				for(let i=0;i<event.target.files.length;i++){
+					console.log("hi")
+					this.generateHash(event.target.files[i]);
+				}
+			}else{
+				throw "select exact two files";
+			}
+		}catch(err){
+			this.setState({errorMessage:err});
+			console.log(err)
 		}
+		
+		
 		
 		// console.log(event.target.files[0])
 	}
@@ -72,7 +88,7 @@ class newBid extends React.Component{
 						<label>upload technical and financial bids</label>
 						<input type='file' multiple onChange={this.uploadFile}/>
 					</Form.Field>
-					<Button  size='small' onClick={this.combinehash}>Generate Hash</Button>
+					<Button  size='small' onClick={this.combinehash} disabled={this.state.isButtonDisabled}>Generate Hash</Button>
 					<br/>
 					<br/>
 					<Form.Field>
