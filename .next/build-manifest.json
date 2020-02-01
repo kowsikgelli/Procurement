@@ -25,7 +25,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/tenders/winner/winners": [
+    "/tenders/closed/closedTenders": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

@@ -5,9 +5,11 @@ import {Card,Image} from 'semantic-ui-react';
 import Layout from '../../../components/Layout';
 class winners extends React.Component{
 	state={
-		Admin:''
+		Admin:'',
+		errMessage:''
 	}
 	static async getInitialProps(props){
+
 		const owner=await instance.methods.owner().call();
 		const winner=await instance.methods.winner(props.query.id).call({from:owner});
 		

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu} from 'semantic-ui-react';
+import {Menu,Responsive,Button} from 'semantic-ui-react';
 import {Link} from '../routes'
 export default ()=>{
 	return(
@@ -19,6 +19,22 @@ export default ()=>{
 					Closed Tenders
 				</a>
 			</Link>
+			<Menu.Item>
+            <Responsive
+              {...Responsive.onlyMobile}
+              as={Button}
+              content='Switch to desktop version'
+              icon='desktop'
+              labelPosition='left'
+            />
+            <Responsive
+              as={Button}
+              content='Switch to mobile version'
+              icon='mobile'
+              labelPosition='left'
+              minWidth={Responsive.onlyTablet.minWidth}
+            />
+          </Menu.Item>
 		</Menu.Menu>
 	</Menu>
 	</div>
