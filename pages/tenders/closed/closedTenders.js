@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../../components/Layout';
 import instance from '../../../ethereum/tender';
 import web3 from '../../../ethereum/web3';
-import {Router} from '../../../routes';
+import {Router,Link} from '../../../routes';
 import {Card} from 'semantic-ui-react'
 class closedTenders extends React.Component{
 	static async getInitialProps(){
@@ -23,8 +23,8 @@ class closedTenders extends React.Component{
 			return{
 				header:tenderobject.tenderSubject,
 				description:(
-					<Link route={`/tenders/${tenderobject.id}`}>
-						<a>view tender</a>
+					<Link route={`/tenders/winner/${tenderobject.id}`}>
+						<a>view Result</a>
 					</Link>
 					),
 				fluid:true,

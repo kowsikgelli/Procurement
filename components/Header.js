@@ -4,14 +4,14 @@ import {Link} from '../routes'
 export default ()=>{
 	return(
 		<div>
-	<Menu style={{margin:'10px'}}>
+	<Menu inverted style={{margin:'10px'}}>
 		<Link route='/'>
 			<a className="item">
 				Home
 			</a>
 		</Link>
 		<Menu.Item>
-			Public Procurement Portal
+			E Procurement Portal
 		</Menu.Item>
 		<Menu.Menu position="right">
 			<Link route='/tenders/closed/closedTenders'>
