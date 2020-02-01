@@ -13,28 +13,17 @@ export default ()=>{
 		<Menu.Item>
 			E Procurement Portal
 		</Menu.Item>
+		<Link route="/tenders/validDoc/validDocument">
+			<a className="item">
+				valid Document
+			</a>
+		</Link>
 		<Menu.Menu position="right">
 			<Link route='/tenders/closed/closedTenders'>
 				<a className="item">
 					Closed Tenders
 				</a>
 			</Link>
-			<Menu.Item>
-            <Responsive
-              {...Responsive.onlyMobile}
-              as={Button}
-              content='Switch to desktop version'
-              icon='desktop'
-              labelPosition='left'
-            />
-            <Responsive
-              as={Button}
-              content='Switch to mobile version'
-              icon='mobile'
-              labelPosition='left'
-              minWidth={Responsive.onlyTablet.minWidth}
-            />
-          </Menu.Item>
 		</Menu.Menu>
 	</Menu>
 	</div>

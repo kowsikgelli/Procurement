@@ -63,8 +63,6 @@ class Procurement extends React.Component{
 		return(
 			<Layout>
 			<div>
-				
-
 				<Form onSubmit={this.register} error={!!this.state.errorMessage} success={!!this.state.successMessage}>
 					<Button loading={this.state.loading} type="submit" content="Register"  primary={true}/>
 					<Message error header={this.state.errorMessage}/>
