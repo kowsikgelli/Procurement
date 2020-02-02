@@ -4,8 +4,10 @@ import Head from 'next/head'
 import Header from './Header';
 export default (props)=>{
 	return(
-		<div>
+		<div style={{ backgroundImage: `url(require("https://kissflow.com/wp-content/uploads/2018/11/ProcurementSystem_Blog.png"))` ,backgroundRepeat: 'no-repeat'}}>
 			
+
+
 				<Header />
 			
 			<Container >
